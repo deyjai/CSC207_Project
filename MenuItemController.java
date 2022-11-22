@@ -21,23 +21,8 @@ public class MenuItemController implements ActionListener
      //actionPerformed method - performs this action when a menu item is clicked
      public void actionPerformed(ActionEvent e)
      {
-          //if about us is clicked - website is opened
-          if(e.getActionCommand().equals("About Us"))
-          {
-               String filePath =  new File("website/aboutUs.html").getAbsolutePath();
-
-               try
-               {
-                    WebPage.openWebpage(new URL("file:///" + filePath));
-               }
-               catch(MalformedURLException ex)
-               {
-                    System.out.println(ex.getMessage());
-               }//end try catch
-          }
-          
           //if user manual is clicked - link to manual is opened
-          else if(e.getActionCommand().equals("User Manual"))
+          if(e.getActionCommand().equals("User Manual"))
           {
                try
                {

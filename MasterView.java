@@ -17,7 +17,7 @@ public class MasterView extends JFrame
      private JMenu colourMenu, helpMenu, backgroundMenu, templateMenu; //stores all menus in the menu bar
 
      private JMenuItem colour1, colour2, colour3, colour4, colour5; //menu items for object colours
-     private JMenuItem userManual, aboutUs, donateHere; //menu items for the help menu 
+     private JMenuItem userManual, donateHere; //menu items for the help menu
      private JMenuItem standardBackground, marioBackground; //menu items for backgrounds
      private JMenuItem templateItem; //menu item(s) for the template
 
@@ -223,9 +223,7 @@ public class MasterView extends JFrame
           
           //initializes the help menu
           this.userManual = new JMenuItem("User Manual");
-          this.aboutUs = new JMenuItem("About Us");
           this.donateHere = new JMenuItem("Donate Here");
-          this.helpMenu.add(this.aboutUs);
           this.helpMenu.add(this.userManual);
           this.helpMenu.add(this.donateHere);
          
@@ -269,7 +267,6 @@ public class MasterView extends JFrame
           
           //help menu items
           this.donateHere.addActionListener(new MenuItemController(this));
-          this.aboutUs.addActionListener(new MenuItemController(this));
           this.userManual.addActionListener(new MenuItemController(this));
                     
           //background menu items
