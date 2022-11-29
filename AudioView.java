@@ -48,26 +48,26 @@ public class AudioView extends JFrame
         //some extra features
         frame.setTitle("Audio Settings");
         frame.setLocation(0,0);
-        frame.setSize(new Dimension(600, 200));
+        frame.setSize(new Dimension(500, 150));
 
         //labels - prompts for input (music/sound effects volume)
         JLabel musicVolume = new JLabel("       Music Volume:");
         JLabel soundEffectsVolume = new JLabel("Sound Effects Volume:");
 
         //sliders - input (music/sound effects volume)
-        JSlider changeMusicVolume = new JSlider();
-        JSlider changeSoundEffectsVolume = new JSlider();
+        JSlider changeMusicVolume = new JSlider(0, 100, 0);
+        JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
 
         //icons - displays an icon according to the type of input
-        ImageIcon musicIcon = new ImageIcon();
-        ImageIcon soundEffectsIcon = new ImageIcon();
+        ImageIcon musicIcon = new ImageIcon("music_note_icon.png");
+        ImageIcon soundEffectsIcon = new ImageIcon("sound_effects_icon.png");
 
         //add all inputs to their input objects
         music.add(musicVolume);
         //music.add(musicIcon);
         music.add(changeMusicVolume);
         soundEffects.add(soundEffectsVolume);
-       // soundEffects.add(soundEffectsIcon);
+        //soundEffects.add(soundEffectsIcon);
         soundEffects.add(changeSoundEffectsVolume);
 
         //add all input objects to the first input panel
