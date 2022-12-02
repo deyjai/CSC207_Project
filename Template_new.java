@@ -3,6 +3,9 @@
  * Last Modified: 11/15/2022
  * Insert Description Here */
 
+import javax.swing.*;
+import java.awt.*;
+
 /*
 This will be your GUI. If you're making a model class, DO NOT mix it with this class. You'll need to create a separate
 model class, and this class will hold a pointer, so you can access it.
@@ -20,21 +23,12 @@ Again, PLEASE don't make multiple attributes for your kinematics parameters if y
 * As for controllers, you can pretend they don't exist for now. Just make an input component (ex. JButton) and a method
 that you want to be executed when that button is called.
 
- */
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-
-public class Template extends JFrame
+public class Template_new extends JFrame
 {
     public static void open()
     {
         //basics
-        Template frame = new Template();
+        Template_new frame = new Template_new();
         JPanel panel = new JPanel(new BorderLayout());
         frame.setContentPane(panel);
 
@@ -72,3 +66,4 @@ public class Template extends JFrame
         panel.add(component, BorderLayout.CENTER);
     }
 }
+*/

@@ -1,96 +1,96 @@
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+/* Template
+ * By: Insert Name Here
+ * Last Modified: 11/15/2022
+ * Insert Description Here */
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-/**
- * Save File View
- */
+/*
+This will be your GUI. If you're making a model class, DO NOT mix it with this class. You'll need to create a separate
+model class, and this class will hold a pointer, so you can access it.
 
-public class OutputNotebook {
-    static String saveFileSuccess = "Saved board!!";
-    static String saveFileExistsError = "Error: File already exists";
-    static String saveFileNotSerError = "Error: File must end with .ser";
-    private final saveStrategy strat;
-    private final DataModel dataModel;
-    private Label saveFileErrorLabel = new Label("");
-    private Label saveBoardLabel = new Label(String.format("Enter name of file to save"));
-    private TextField saveFileNameTextField = new TextField("");
-    private Button saveBoardButton = new Button("Save board");
+For now, you should make your appropriate set/get methods and assume these methods will give you the info you need.
+Again, PLEASE don't make multiple attributes for your kinematics parameters if you're using them.
+    - If you're doing the DataModel class, there should be one private ArrayList <double[]> attribute that holds the
+    history of all kinematics parameters. You only need one set method (with a parameter for each kinematics value) and
+    one get method for this.
+    - If any other class needs kinematics parameters, it should have an attribute that points to the DataModel class.
+    You can get everything you need using one of the DataModel's get methods.
+    - If you need to directly access one of the components in MasterView (this will likely only be for the Audio/AIHelper
+    class), you should make an attribute that points to MasterView.
+
+* As for controllers, you can pretend they don't exist for now. Just make an input component (ex. JButton) and a method
+that you want to be executed when that button is called.
+*/
+public class OutputNotebook extends JFrame
+
+{
+    private String file;
+    private saveStrategy strat;
+    //private final DataModel dataModel;
     MasterView masterView;
-
-    /**
-     * Constructor
-     *
-     * @param masterView master view
-     */
-    public OutputNotebook(MasterView masterView, DataModel dataModel, saveStrategy strategy) {
+    public void OutputNotebook(MasterView masterView, saveStrategy strategy) {
+        this.file = "";
         this.masterView = masterView;
-        this.dataModel = dataModel;
+        //this.dataModel = dataModel;
         this.strat = strategy;
+        /*DataModel dataModel*/
+    }
+    public static void open()
+    {
+        JFrame frame = new JFrame("Save File");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createUI(frame);
+        frame.setSize(560, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
-        masterView.setMotionState(false);
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(masterView.stage);
-        VBox dialogVbox = new VBox(20);
-        dialogVbox.setPadding(new Insets(20, 20, 20, 20));
-        dialogVbox.setStyle("-fx-background-color: #121212;");
+    }
 
-        saveBoardLabel.setId("SaveBoard"); // DO NOT MODIFY ID
-        saveFileErrorLabel.setId("SaveFileErrorLabel");
-        saveFileNameTextField.setId("SaveFileNameTextField");
-        saveBoardLabel.setStyle("-fx-text-fill: #e8e6e3;");
-        saveBoardLabel.setFont(new Font(16));
-        saveFileErrorLabel.setStyle("-fx-text-fill: #e8e6e3;");
-        saveFileErrorLabel.setFont(new Font(16));
-        saveFileNameTextField.setStyle("-fx-text-fill: #e8e6e3;");
-        saveFileNameTextField.setFont(new Font(16));
+    private static void createUI(JFrame frame) {
+        JPanel panel = new JPanel();
+        LayoutManager layout = new FlowLayout();
+        panel.setLayout(layout);
 
-        String boardName = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()) + ".ser";
-        saveFileNameTextField.setText(boardName);
+        JButton button = new JButton("Choose File Location to Save");
+        final JLabel label = new JLabel();
 
-        saveBoardButton = new Button("Save board");
-        saveBoardButton.setId("SaveBoard"); // DO NOT MODIFY ID
-        saveBoardButton.setStyle("-fx-background-color: #17871b; -fx-text-fill: white;");
-        saveBoardButton.setPrefSize(200, 50);
-        saveBoardButton.setFont(new Font(16));
-        saveBoardButton.setOnAction(e -> saveBoard());
+        button.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            int option = fileChooser.showSaveDialog(frame);
+            if(option == JFileChooser.APPROVE_OPTION){
+                File file = fileChooser.getSelectedFile();
+                try {
+                    FileWriter fw = new FileWriter(file.getPath());
+                    fw.write("hello");
+                    //write data into file
+                    //format it
+                    //if serializable object verse not? strategy
+                    fw.close();
 
-        VBox saveBoardBox = new VBox(10, saveBoardLabel, saveFileNameTextField, saveBoardButton, saveFileErrorLabel);
-
-        dialogVbox.getChildren().add(saveBoardBox);
-        Scene dialogScene = new Scene(dialogVbox, 400, 400);
-        dialog.setScene(dialogScene);
-        dialog.show();
-        dialog.setOnCloseRequest(event -> {
-            masterView.setMotionState(false);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                label.setText("File Saved as: " + file.getName());
+            }else{
+                label.setText("Save command canceled");
+            }
         });
 
+        panel.add(button);
+        panel.add(label);
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
     }
 
-    /**
-     * Save the board to a file
-     */
     public void saveBoard() {
-        this.strat.saveBoard();
+        // this.strat.saveBoard();
         //make abstract -> two options to save file as
     }
-
-
-
 }
+
+
+

@@ -203,7 +203,7 @@ public class MasterView extends JFrame
           this.helpMenu = new JMenu("Help");
           this.colourMenu = new JMenu("Colours");
           this.backgroundMenu = new JMenu("Backgrounds");
-          this.templateMenu = new JMenu("Templates");
+          this.templateMenu = new JMenu("Save");
 
           //initializes the menu item that opens up the template
           this.templateItem = new JMenuItem("Open Template 1");

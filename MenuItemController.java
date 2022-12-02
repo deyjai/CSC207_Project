@@ -98,7 +98,8 @@ public class MenuItemController implements ActionListener
           //if the template is chosen - opens a Template JFrame with a static method
           else if(e.getActionCommand().equals("Open Template 1"))
           {
-               Template.open();
+               OutputNotebook.open();
+               //MADE STATIC
           }
      }//end actionPerformed
      
