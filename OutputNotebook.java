@@ -31,12 +31,12 @@ public class OutputNotebook extends JFrame
 {
     private String file;
     private saveStrategy strat;
-    //private final DataModel dataModel;
+    private DataModel dataModel;
     MasterView masterView;
-    public void OutputNotebook(MasterView masterView, saveStrategy strategy) {
+    public void OutputNotebook(MasterView masterView, DataModel dataModel, saveStrategy strategy) {
         this.file = "";
         this.masterView = masterView;
-        //this.dataModel = dataModel;
+        this.dataModel = dataModel;
         this.strat = strategy;
         /*DataModel dataModel*/
     }
@@ -66,10 +66,13 @@ public class OutputNotebook extends JFrame
                 File file = fileChooser.getSelectedFile();
                 try {
                     FileWriter fw = new FileWriter(file.getPath());
+                    //fw.write(String.format("%20s %20s", "Average: " + this.dataModel.getAverage()));
+                    //fw.write(String.format("%20s %20s", "Max: " + this.dataModel.getMax()));
+                    //fw.write(String.format("%20s %20s", "Min: " + this.dataModel.getMin()));
                     fw.write("hello");
                     //write data into file
                     //format it
-                    //if serializable object verse not? strategy
+                    //DONT CANCEL WHOLE TAB
                     fw.close();
 
                 } catch (IOException ex) {
@@ -85,6 +88,7 @@ public class OutputNotebook extends JFrame
         panel.add(label);
         frame.getContentPane().add(panel, BorderLayout.CENTER);
     }
+
 
     public void saveBoard() {
         // this.strat.saveBoard();
