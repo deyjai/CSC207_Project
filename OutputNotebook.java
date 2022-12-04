@@ -33,25 +33,34 @@ public class OutputNotebook extends JFrame
     private saveStrategy strat;
     private DataModel dataModel;
     MasterView masterView;
-    public void OutputNotebook(MasterView masterView, DataModel dataModel, saveStrategy strategy) {
+    public OutputNotebook(MasterView masterView, DataModel dataModel, saveStrategy strategy) {
         this.file = "";
         this.masterView = masterView;
         this.dataModel = dataModel;
         this.strat = strategy;
+        this.createUI(this.dataModel);
+
         /*DataModel dataModel*/
     }
+    public OutputNotebook() {
+
+        this.createUI(this.dataModel);
+
+        /*DataModel dataModel*/
+    }
+
     public static void open()
     {
-        JFrame frame = new JFrame("Save File");
+        OutputNotebook frame = new OutputNotebook();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        createUI(frame);
         frame.setSize(560, 200);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+
     }
 
-    private static void createUI(JFrame frame) {
+    private void createUI(DataModel dataModel) {
         JPanel panel = new JPanel();
         LayoutManager layout = new FlowLayout();
         panel.setLayout(layout);
@@ -61,14 +70,14 @@ public class OutputNotebook extends JFrame
 
         button.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
-            int option = fileChooser.showSaveDialog(frame);
+            int option = fileChooser.showSaveDialog(this);
             if(option == JFileChooser.APPROVE_OPTION){
                 File file = fileChooser.getSelectedFile();
                 try {
                     FileWriter fw = new FileWriter(file.getPath());
-                    //fw.write(String.format("%20s %20s", "Average: " + this.dataModel.getAverage()));
-                    //fw.write(String.format("%20s %20s", "Max: " + this.dataModel.getMax()));
-                    //fw.write(String.format("%20s %20s", "Min: " + this.dataModel.getMin()));
+                    fw.write(String.format("%20s %20s", "Average: " + this.dataModel.getAverage()));
+                    fw.write(String.format("%20s %20s", "Max: " + this.dataModel.getMax()));
+                    fw.write(String.format("%20s %20s", "Min: " + this.dataModel.getMin()));
                     fw.write("hello");
                     //write data into file
                     //format it
@@ -86,7 +95,7 @@ public class OutputNotebook extends JFrame
 
         panel.add(button);
         panel.add(label);
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        this.setContentPane(panel);
     }
 
 

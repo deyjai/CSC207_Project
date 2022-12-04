@@ -1,26 +1,28 @@
 
-/*
+
 import javax.swing.*;
 import java.awt.*;
 
 
-public class InputNotebook extends JFrame
+public class InputNotebook extends JPanel
 {
-    private HistoryView historyView;
-    private SummaryView summaryView;
+
+    private DataModel dataModel;
     MasterView masterView;
-    public void InputNotebook(MasterView masterView, HistoryView historyView, SummaryView summaryView) {
+    public void InputNotebook(MasterView masterView, DataModel dataModel) {
 
         this.masterView = masterView;
-        this.historyView = historyView;
-        this.summaryView = summaryView;
+        this.dataModel = dataModel;
     }
 
     public void inputFile()
     {
         throw new UnsupportedOperationException();
+        //method for when button is pressed
+        //create buttons
+        //select soemthing with a check box, adn input whatever is checked
 
     }
 }
 
- */
+
