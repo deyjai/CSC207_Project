@@ -95,8 +95,8 @@ public class MenuItemController implements ActionListener
                this.masterView.getMotionView().setBackgroundStandard();
           }
 
-          //if the template is chosen - opens a Template JFrame with a static method
-          else if(e.getActionCommand().equals("Open Template 1"))
+          //if the Audio menu is chosen - opens an Audio JFrame with a static method
+          else if(e.getActionCommand().equals("Open Audio Menu"))
           {
                AudioView.open();
           }

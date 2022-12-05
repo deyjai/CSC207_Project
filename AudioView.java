@@ -1,12 +1,13 @@
 /* AudioView
  * By: Dunia
- * Last Modified: 11/15/2022
- * Description: This class gives you the option to turn off and on music, as well as sound effects
+ * Last Modified: 12/04/2022
+ * Description: This class displays the interface for the Audio of this application. It shows the options to turn off and on music, as well as sound effects
  * (ex broadcasting game movements) to better support immersion.
  */
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.ImageIcon;
 
 /*
 This will be your GUI. If you're making a model class, DO NOT mix it with this class. You'll need to create a separate
@@ -48,36 +49,57 @@ public class AudioView extends JFrame
         //some extra features
         frame.setTitle("Audio Settings");
         frame.setLocation(0,0);
-        frame.setSize(new Dimension(500, 150));
+        frame.setSize(new Dimension(500, 200));
 
         //labels - prompts for input (music/sound effects volume)
-        JLabel musicVolume = new JLabel("       Music Volume:");
+        JLabel musicVolume = new JLabel("               Music Volume:");
         JLabel soundEffectsVolume = new JLabel("Sound Effects Volume:");
 
-        //sliders - input (music/sound effects volume)
+        //slider - input (music volume)
         JSlider changeMusicVolume = new JSlider(0, 100, 0);
-        JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
+        changeMusicVolume.setMinorTickSpacing(5);
+        changeMusicVolume.setMajorTickSpacing(10);
+        changeMusicVolume.setPaintTicks(true);
+        changeMusicVolume.setPaintLabels(true);
+        changeMusicVolume.setSnapToTicks(true);
+        Dimension d = changeMusicVolume.getPreferredSize();
+        changeMusicVolume.setPreferredSize(new Dimension(d.width+100,d.height));
 
-        //icons - displays an icon according to the type of input
-        ImageIcon musicIcon = new ImageIcon("music_note_icon.png");
-        ImageIcon soundEffectsIcon = new ImageIcon("sound_effects_icon.png");
+        //slider - input (sound effects volume)
+        JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
+        changeSoundEffectsVolume.setMinorTickSpacing(5);
+        changeSoundEffectsVolume.setMajorTickSpacing(10);
+        changeSoundEffectsVolume.setPaintTicks(true);
+        changeSoundEffectsVolume.setPaintLabels(true);
+        changeSoundEffectsVolume.setSnapToTicks(true);
+        Dimension d2 = changeSoundEffectsVolume.getPreferredSize();
+        changeSoundEffectsVolume.setPreferredSize(new Dimension(d2.width+100,d2.height));
+
+        //creating label where the noMusicImgIcon image will be stored
+        JLabel noMusicIcon = new JLabel();
+        //resizing the noMusicImgIcon image to another image that's the size of the JLabel
+        ImageIcon noMusicImgIcon = new ImageIcon(new ImageIcon("C:\\Users\\dunia\\OneDrive\\Documents\\University\\Course Work\\University Year 4\\Fall Semester\\CSC207\\CSC207_Project\\images\\no_music_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        //creating an ImageIcon from the resized ImageIcon above
+        noMusicIcon.setIcon(noMusicImgIcon);
+
+        //creating label where the noSoundEffectsImgIcon image will be stored
+        JLabel noSoundEffectsIcon = new JLabel();
+        //resizing the noSoundEffectsImgIcon image to another image that's the size of the JLabel
+        ImageIcon noSoundEffectsImgIcon = new ImageIcon(new ImageIcon("C:\\Users\\dunia\\OneDrive\\Documents\\University\\Course Work\\University Year 4\\Fall Semester\\CSC207\\CSC207_Project\\images\\no_sound_effects_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        //creating an ImageIcon from the resized ImageIcon above
+        noSoundEffectsIcon.setIcon(noSoundEffectsImgIcon);
 
         //add all inputs to their input objects
         music.add(musicVolume);
-        //music.add(musicIcon);
+        music.add(noMusicIcon);
         music.add(changeMusicVolume);
         soundEffects.add(soundEffectsVolume);
-        //soundEffects.add(soundEffectsIcon);
+        soundEffects.add(noSoundEffectsIcon);
         soundEffects.add(changeSoundEffectsVolume);
 
         //add all input objects to the first input panel
         audioPanel.add(music);
         audioPanel.add(soundEffects);
 
-        //adding custom components
-        JComponent component = new JComponent() {
-
-        };
-        audioPanel.add(component, BorderLayout.CENTER);
     }
 }

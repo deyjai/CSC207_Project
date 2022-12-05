@@ -14,12 +14,12 @@ public class MasterView extends JFrame
      //menu bar
      private JMenuBar menuBar; //stores an instance of the menu bar
 
-     private JMenu colourMenu, helpMenu, backgroundMenu, templateMenu; //stores all menus in the menu bar
+     private JMenu colourMenu, helpMenu, backgroundMenu, audioMenu; //stores all menus in the menu bar
 
      private JMenuItem colour1, colour2, colour3, colour4, colour5; //menu items for object colours
      private JMenuItem userManual, donateHere; //menu items for the help menu
      private JMenuItem standardBackground, marioBackground; //menu items for backgrounds
-     private JMenuItem templateItem; //menu item(s) for the template
+     private JMenuItem audioItem; //menu item(s) for the audio menu
 
      //main panels
      private JPanel mainPanel; //holds everything except the menu bar
@@ -203,11 +203,11 @@ public class MasterView extends JFrame
           this.helpMenu = new JMenu("Help");
           this.colourMenu = new JMenu("Colours");
           this.backgroundMenu = new JMenu("Backgrounds");
-          this.templateMenu = new JMenu("Templates");
+          this.audioMenu = new JMenu("Audio");
 
-          //initializes the menu item that opens up the template
-          this.templateItem = new JMenuItem("Open Template 1");
-          this.templateMenu.add(this.templateItem);
+          //initializes the menu item that opens up the audio menu
+          this.audioItem = new JMenuItem("Open Audio Menu");
+          this.audioMenu.add(this.audioItem);
 
           //initializes the menu items for colour and adds them to the menu
           this.colour1 = new JMenuItem("Red");
@@ -234,10 +234,10 @@ public class MasterView extends JFrame
           this.backgroundMenu.add(this.standardBackground);
           
           //adds all menus to the menu bar
-          this.menuBar.add(this.templateMenu);
           this.menuBar.add(this.colourMenu);
           this.menuBar.add(this.backgroundMenu);
           this.menuBar.add(this.helpMenu);
+          this.menuBar.add(this.audioMenu);
      }//draws the menu
      
      //setCharacteristics method - sets the basic attributes of the JFrame
@@ -255,8 +255,8 @@ public class MasterView extends JFrame
      //registerControllers method - adds listeners to all input options
      private void registerControllers()
      {
-          //template menu items
-          this.templateItem.addActionListener(new MenuItemController(this));
+          //audio menu items
+          this.audioItem.addActionListener(new MenuItemController(this));
 
           //colour menu items
           this.colour1.addActionListener(new MenuItemController(this));
