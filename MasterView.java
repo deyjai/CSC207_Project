@@ -43,11 +43,11 @@ public class MasterView extends JFrame
      private JLabel promptFinalV;
      private JLabel promptAcceleration;
      private JLabel promptDisplacement; //labels for prompts
-     private JTextField inputTime;
+     JTextField inputTime;
      JTextField inputInitialV;
-     private JTextField inputFinalV;
-     private JTextField inputAcceleration;
-     private JTextField inputDisplacement; //text fields for input
+     JTextField inputFinalV;
+     JTextField inputAcceleration;
+     JTextField inputDisplacement; //text fields for input
      
      //command buttons for the simulation
      private JButton start;
