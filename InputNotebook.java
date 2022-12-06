@@ -15,7 +15,23 @@ public class InputNotebook extends JPanel
         this.dataModel = dataModel;
     }
 
-    public void inputFile()
+    public void InputNotebook() {
+
+        this.inputFile(this.dataModel);
+    }
+
+    public static void open()
+    {
+        OutputNotebook frame = new OutputNotebook();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(560, 200);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+
+    }
+
+    public void inputFile(DataModel dataModel)
     {
         throw new UnsupportedOperationException();
         //method for when button is pressed

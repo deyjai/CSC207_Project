@@ -78,7 +78,7 @@ public class OutputNotebook extends JFrame
                     fw.write(String.format("%20s %20s", "Average: " + this.dataModel.getAverage()));
                     fw.write(String.format("%20s %20s", "Max: " + this.dataModel.getMax()));
                     fw.write(String.format("%20s %20s", "Min: " + this.dataModel.getMin()));
-                    fw.write("hello");
+                    //fw.write("hello");
                     //write data into file
                     //format it
                     //DONT CANCEL WHOLE TAB
