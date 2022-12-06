@@ -22,7 +22,7 @@ public class MasterView extends JFrame
      private JMenuItem templateItem; //menu item(s) for the template
 
      //main panels
-     private JPanel mainPanel; //holds everything except the menu bar
+     JPanel mainPanel; //holds everything except the menu bar
      private JPanel outputPanel; //holds the motion
      private JPanel inputPanelHolder; //holds input panels
      private JPanel inputPanel2; //this is a second instance of an input panel - the other one is initialized in the drawLayout method
@@ -33,9 +33,21 @@ public class MasterView extends JFrame
      private boolean motionState; //will start animation if this is true
      
      //used for user input
-     private JPanel time, initialV, finalV, acceleration, displacement; //panels to hold each prompt and input - stored in an input panel
-     private JLabel promptTime, promptInitialV, promptFinalV, promptAcceleration, promptDisplacement; //labels for prompts
-     private JTextField inputTime, inputInitialV, inputFinalV, inputAcceleration, inputDisplacement; //text fields for input
+     private JPanel time;
+     JPanel initialV;
+     private JPanel finalV;
+     private JPanel acceleration;
+     private JPanel displacement; //panels to hold each prompt and input - stored in an input panel
+     private JLabel promptTime;
+     JLabel promptInitialV;
+     private JLabel promptFinalV;
+     private JLabel promptAcceleration;
+     private JLabel promptDisplacement; //labels for prompts
+     private JTextField inputTime;
+     JTextField inputInitialV;
+     private JTextField inputFinalV;
+     private JTextField inputAcceleration;
+     private JTextField inputDisplacement; //text fields for input
      
      //command buttons for the simulation
      private JButton start;

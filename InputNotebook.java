@@ -13,6 +13,7 @@ public class InputNotebook extends JPanel
 
         this.masterView = masterView;
         this.dataModel = dataModel;
+        this.inputFile(this.dataModel);
     }
 
     public void InputNotebook() {
