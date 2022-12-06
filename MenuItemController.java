@@ -5,7 +5,6 @@
 
 import java.awt.event.*;
 import java.net.*;
-import java.io.*;
 
 public class MenuItemController implements ActionListener
 {
@@ -98,7 +97,7 @@ public class MenuItemController implements ActionListener
           //if the template is chosen - opens a Template JFrame with a static method
           else if(e.getActionCommand().equals("Open Template 1"))
           {
-               Template.open();
+               HistoryView.open();
           }
      }//end actionPerformed
      

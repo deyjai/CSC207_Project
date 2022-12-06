@@ -10,12 +10,14 @@ public class DataModel {
     {
         DataModel m = new DataModel();
         //System.out.println(kinematicsParameters);
-        setParameters(1,2,3,4,5);
-        setParameters(1,3,6,3,1);
-        System.out.println(Arrays.toString(kinematicsParameters.get(0)));
-        System.out.println(Arrays.toString(kinematicsParameters.get(1)));
+        setParameters(20.0,3.0,6.0,3.0,1.0);
+        setParameters(10.0,2.0,3.0,4.0,5.0);
+
+        //System.out.println(Arrays.toString(kinematicsParameters.get(0)));
+        //System.out.println(Arrays.toString(kinematicsParameters.get(1)));
         //System.out.println(Arrays.toString(m.getAverage()));
-        System.out.println(Arrays.toString(m.getMax()));
+        //System.out.println(Arrays.toString(m.getMax()));
+        //System.out.println(Arrays.toString(m.getMin()));
     }
 
 
@@ -69,28 +71,72 @@ public class DataModel {
     }
 
     public double[] getMax() {
-        double[] f = new double[5];
-        double t = 0;
-        double[] max_dis = new double[kinematicsParameters.size()+1];
-        double[] max_acc = new double[kinematicsParameters.size()+1];
-        double[] max_v1 = new double[kinematicsParameters.size()+1];
-        double[] max_v2 = new double[kinematicsParameters.size()+1];
-        double[] max_time = new double[kinematicsParameters.size()+1];
+        double max_dis = 0;
+        double max_acc = 0;
+        double max_v1 = 0;
+        double max_v2 = 0;
+        double max_time = 0;
 
-        for(int i=0; i <kinematicsParameters.size(); i++)
-        {
-            for(int j=0; j < kinematicsParameters.get(i).length; j++)
-            {
-                //System.out.println("In the second loop: " + Arrays.toString(new double[]{max_dis[j]}));
+        for (double[] internalArray : kinematicsParameters) {
+            int j = 0;
+            if (internalArray[j] >= max_dis) {
+                max_dis = internalArray[j];
+            }
+            if (internalArray[j + 1] >= max_acc) {
+                max_acc = internalArray[j + 1];
+            }
+            if (internalArray[j + 2] >= max_v1) {
+                max_v1 = internalArray[j + 2];
+            }
+            if (internalArray[j + 3] >= max_v2) {
+                max_v2 = internalArray[j + 3];
+            }
+            if (internalArray[j + 4] >= max_time) {
+                max_time = internalArray[j + 4];
             }
         }
-        return max_dis;
+        return new double[]{max_dis, max_acc, max_v1, max_v2, max_time};
+
     }
 
     // Public method
-    public double getMin() {
-        System.out.println("get min");
-        return 1;
+    public double[] getMin() {
+        double min_dis = 1000000;
+        double min_acc = 1000000;
+        double min_v1 = 1000000;
+        double min_v2 = 1000000;
+        double min_time = 1000000;
+
+        for (double[] internalArray : kinematicsParameters) {
+            int j = 0;
+            if (internalArray[j] <= min_dis ) {
+                min_dis = internalArray[j];
+            }
+            if (internalArray[j + 1] <= min_acc) {
+                min_acc = internalArray[j + 1];
+            }
+            if (internalArray[j + 2] <= min_v1) {
+                min_v1 = internalArray[j + 2];
+            }
+            if (internalArray[j + 3] <= min_v2) {
+                min_v2 = internalArray[j + 3];
+            }
+            if (internalArray[j + 4] <= min_time) {
+                min_time = internalArray[j + 4];
+            }
+        }
+        return new double[]{min_dis, min_acc, min_v1, min_v2, min_time};
+
     }
+
+    public double getIntegral(double t1, double t2){
+
+        return 1.0;
+    }
+
+    public ArrayList<double[]> getAllParameters(){
+        return kinematicsParameters;
+    }
+
 
 }
