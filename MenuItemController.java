@@ -22,34 +22,7 @@ public class MenuItemController implements ActionListener
      public void actionPerformed(ActionEvent e)
      {
           //if user manual is clicked - link to manual is opened
-          if(e.getActionCommand().equals("User Manual"))
-          {
-               try
-               {
-                    WebPage.openWebpage(new URL("https://docs.google.com/document/d/1DIo9VoXnoqKHM-vjk-FfupjOo3wthZAgv2zNEfhprds/edit?usp=sharing"));
-               }
-               catch(MalformedURLException ex)
-               {
-                    System.out.println(ex.getMessage());
-               }//end try catch
-          }
-          
-          //if donate here option is clicked - opens a link to paypal
-          else if(e.getActionCommand().equals("Donate Here"))
-          {
-               try
-               {
-                    WebPage.openWebpage(new URL("https://www.paypal.com/ca/home"));
-               }
-               catch(MalformedURLException ex)
-               {
-                    System.out.println(ex.getMessage());
-                    System.exit(0);
-               }//end try catch
-          }
-          
-          //if red colour is chosen - sets object to red
-          else if(e.getActionCommand().equals("Red"))
+          if(e.getActionCommand().equals("Red"))
           {
                masterView.getMotionView().setColor("red");
                masterView.getMotionView().repaint();
