@@ -36,6 +36,9 @@ public class AudioView extends JFrame
     //initializes a new instance of the class MusicAudio
     MusicAudio musicAudio = new MusicAudio();
 
+    JSlider changeSoundEffectsVolume;
+    JSlider changeMusicVolume;
+
     MasterView master;
 
     public AudioView(MasterView m)
@@ -80,7 +83,7 @@ public class AudioView extends JFrame
         JLabel soundEffectsVolume = new JLabel("Sound Effects Volume:");
 
         //slider - input (music volume)
-        JSlider changeMusicVolume = new JSlider(-40, 6, 0);
+        changeMusicVolume = new JSlider(-40, 6, 0);
         changeMusicVolume.setMinorTickSpacing(5);
         changeMusicVolume.setMajorTickSpacing(10);
         changeMusicVolume.setPaintTicks(true);
@@ -90,14 +93,14 @@ public class AudioView extends JFrame
         changeMusicVolume.setPreferredSize(new Dimension(d.width + 100, d.height));
 
         //slider - input (sound effects volume)
-        JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
-        changeSoundEffectsVolume.setMinorTickSpacing(5);
-        changeSoundEffectsVolume.setMajorTickSpacing(10);
-        changeSoundEffectsVolume.setPaintTicks(true);
-        changeSoundEffectsVolume.setPaintLabels(true);
-        changeSoundEffectsVolume.setSnapToTicks(true);
-        Dimension d2 = changeSoundEffectsVolume.getPreferredSize();
-        changeSoundEffectsVolume.setPreferredSize(new Dimension(d2.width + 100, d2.height));
+        this.changeSoundEffectsVolume = new JSlider(0, 100, 0);
+        this.changeSoundEffectsVolume.setMinorTickSpacing(5);
+        this.changeSoundEffectsVolume.setMajorTickSpacing(10);
+        this.changeSoundEffectsVolume.setPaintTicks(true);
+        this.changeSoundEffectsVolume.setPaintLabels(true);
+        this.changeSoundEffectsVolume.setSnapToTicks(true);
+        Dimension d2 = this.changeSoundEffectsVolume.getPreferredSize();
+        this.changeSoundEffectsVolume.setPreferredSize(new Dimension(d2.width + 100, d2.height));
 
         //creating label where the noMusicImgIcon image will be stored
         JLabel noMusicIcon = new JLabel();
@@ -126,12 +129,8 @@ public class AudioView extends JFrame
         audioPanel.add(soundEffects);
     }
 
-
-    public static void open(MasterView m) {
-
-        AudioView a = new AudioView(m);
-        a.initAudioView();
-
+    private void addListener()
+    {
         changeMusicVolume.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -142,9 +141,17 @@ public class AudioView extends JFrame
                 musicAudio.floatControl.setValue(musicAudio.currentMusicVolume);
             }
         });
-
-        playMusic();
     }
+
+
+    public static void open(MasterView m) {
+
+        AudioView a = new AudioView(m);
+        a.initAudioView();
+        a.addListener();
+        a.playMusic();
+    }
+
     //method that plays music
     public void playMusic() {
         musicAudio.setMusicFiles(standardMusic);
