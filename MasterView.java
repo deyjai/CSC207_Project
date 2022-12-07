@@ -14,30 +14,31 @@ public class MasterView extends JFrame
      //menu bar
      private JMenuBar menuBar; //stores an instance of the menu bar
 
-     private JMenu colourMenu, helpMenu, backgroundMenu, audioMenu, aIHelperMenu; //stores all menus in the menu bar
+     private JMenu colourMenu, backgroundMenu, statisticsMenu, notebookMenu, supportMenu; //stores all menus in the menu bar
 
      private JMenuItem colour1, colour2, colour3, colour4, colour5; //menu items for object colours
-     private JMenuItem userManual, donateHere; //menu items for the help menu
      private JMenuItem standardBackground, marioBackground; //menu items for backgrounds
-     private JMenuItem audioItem; //menu item(s) for the audio menu
-     private JMenuItem instructions, colourContrast; //menu items for aIHelper
+     private JMenuItem summary, history; //menu item(s) for Anushay
+     private JMenuItem audio, instructions, colourContrast; //menu items for Dunia
+     private JMenuItem outputNotebook, inputNotebook; //menu items for Laiba
+
 
      //main panels
      private JPanel mainPanel; //holds everything except the menu bar
      private JPanel outputPanel; //holds the motion
      private JPanel inputPanelHolder; //holds input panels
      private JPanel inputPanel2; //this is a second instance of an input panel - the other one is initialized in the drawLayout method
-     
+
      //motion
      private MotionView motionView; //GUI for the animated motion
      private ObjectMotion motionModel; //model for the animated motion
      private boolean motionState; //will start animation if this is true
-     
+
      //used for user input
      private JPanel time, initialV, finalV, acceleration, displacement; //panels to hold each prompt and input - stored in an input panel
      private JLabel promptTime, promptInitialV, promptFinalV, promptAcceleration, promptDisplacement; //labels for prompts
      private JTextField inputTime, inputInitialV, inputFinalV, inputAcceleration, inputDisplacement; //text fields for input
-     
+
      //command buttons for the simulation
      private JButton start;
      private JButton stop;
@@ -53,9 +54,9 @@ public class MasterView extends JFrame
           this.setCharacteristics();
           this.motionState = false;
      }//end constructor
-     
+
      /**** ACCESSOR METHODS ****/
-     
+
      //getInputField method - returns a specific input field based on the parameter string
      public JTextField getInputField(String s)
      {
@@ -90,19 +91,19 @@ public class MasterView extends JFrame
      {
           return this.motionView;
      }//end getMotionView
-     
+
      //getMotionModel method
      public ObjectMotion getMotionModel()
      {
           return this.motionModel;
      }//end getMotionModel
-     
+
      //setMotionState method
      public void setMotionState(boolean b)
      {
           this.motionState = b;
      }//end setMotionState
-     
+
      /**** HELPER METHODS ****/
 
      //drawLayout method - draws the main panel and menu bar
@@ -111,26 +112,26 @@ public class MasterView extends JFrame
           this.drawPanel();
           this.drawMenu();
      }//end drawLayout
-     
+
      //drawPanel method - draws the main panel, consisting of the motion output and all input fields
      private void drawPanel()
      {
           //initialize panels
           this.mainPanel = new JPanel(new BorderLayout()); //main panel of this frame
           this.outputPanel = new JPanel(); //output panel of this frame
-          
+
           //initialize motion objects
           this.motionModel = new ObjectMotion();
           this.motionView = new MotionView(this.motionModel);
-          
+
           //add above objects to the main panel
           this.outputPanel.add(this.motionView);
           this.mainPanel.add(this.outputPanel, BorderLayout.WEST);
-          
+
           //initialize input panel holder
           this.inputPanelHolder = new JPanel(new GridLayout(2,1));
           this.mainPanel.add(inputPanelHolder, BorderLayout.EAST);
-          
+
           //initialize and add the first input panel
           JPanel inputPanel = new JPanel(); //BoxLayout can not be shared (meaning not allowed to be an attribute) so the JPanel has to be made here
           inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
@@ -139,28 +140,28 @@ public class MasterView extends JFrame
           //initialize and add the second input panel
           this.inputPanel2 = new JPanel(new GridLayout(3,1));
           this.inputPanelHolder.add(inputPanel2);
-          
+
           //initialize objects for the first input panel - holds textfields and labels
           this.time = new JPanel();
           this.initialV = new JPanel();
           this.finalV = new JPanel();
           this.acceleration = new JPanel();
           this.displacement = new JPanel();
-          
+
           //labels - prompts for input
           this.promptTime = new JLabel("                Time:");
           this.promptInitialV = new JLabel("Initial Velocity:");;
           this.promptFinalV = new JLabel("Final Velocity:");;
           this.promptAcceleration = new JLabel(" Acceleration:");;
           this.promptDisplacement = new JLabel("Displacement:");;
-          
+
           //text fields - input
           this.inputTime = new JTextField(4);
           this.inputInitialV = new JTextField(4);
           this.inputFinalV = new JTextField(4);
           this.inputAcceleration = new JTextField(4);
           this.inputDisplacement = new JTextField(4);
-          
+
           //add all inputs to their input objects
           this.time.add(this.promptTime);
           this.time.add(this.inputTime);
@@ -172,50 +173,60 @@ public class MasterView extends JFrame
           this.acceleration.add(this.inputAcceleration);
           this.displacement.add(this.promptDisplacement);
           this.displacement.add(this.inputDisplacement);
-          
+
           //add all input objects to the first input panel
           inputPanel.add(this.time);
           inputPanel.add(this.initialV);
           inputPanel.add(this.finalV);
           inputPanel.add(this.acceleration);
           inputPanel.add(this.displacement);
-          
+
           //initialize command buttons for the second input panel
           this.start = new JButton("Start");
           this.reset = new JButton("Reset");
           this.stop = new JButton("Stop");
-          
+
           //add buttons to the second input panel
           this.inputPanel2.add(start);
           this.inputPanel2.add(stop);
           this.inputPanel2.add(reset);
-          
+
           //set the content pane the main panel
           this.setContentPane(this.mainPanel);
      }//end drawPanel
-     
+
      //drawMenu - creates the menu bar
      private void drawMenu()
      {
           //initializes the menu bar
           this.menuBar = new JMenuBar();
-          
+
           //initializes all menus in the menu bar
-          this.helpMenu = new JMenu("Help");
+          this.statisticsMenu = new JMenu("Statistics");
+          this.supportMenu = new JMenu("User Support");
+          this.notebookMenu = new JMenu("Notebook");
           this.colourMenu = new JMenu("Colours");
           this.backgroundMenu = new JMenu("Backgrounds");
-          this.audioMenu = new JMenu("Audio");
-          this.aIHelperMenu = new JMenu("AI Helper");
 
-          //initializes the menu item that opens up the audio menu
-          this.audioItem = new JMenuItem("Open Audio Menu");
-          this.audioMenu.add(this.audioItem);
+          //initializes the menu items for Anushay
+          this.summary = new JMenuItem("Summary");
+          this.history = new JMenuItem("History");
+          this.statisticsMenu.add(this.summary);
+          this.statisticsMenu.add(this.history);
 
-          //initializes the menu items that opens up the aIHelper menu
+          //initializes the menu items for Dunia
+          this.audio = new JMenuItem("Audio");
           this.instructions = new JMenuItem("Instructions");
           this.colourContrast = new JMenuItem("Colour Contrast");
-          this.aIHelperMenu.add(this.instructions);
-          this.aIHelperMenu.add(this.colourContrast);
+          this.supportMenu.add(this.audio);
+          this.supportMenu.add(this.instructions);
+          this.supportMenu.add(this.colourContrast);
+
+          //initializes the menu items for Laiba
+          this.outputNotebook = new JMenuItem("Save");
+          this.inputNotebook = new JMenuItem("Load");
+          this.notebookMenu.add(this.outputNotebook);
+          this.notebookMenu.add(this.inputNotebook);
 
           //initializes the menu items for colour and adds them to the menu
           this.colour1 = new JMenuItem("Red");
@@ -228,27 +239,21 @@ public class MasterView extends JFrame
           this.colourMenu.add(colour3);
           this.colourMenu.add(colour4);
           this.colourMenu.add(colour5);
-          
-          //initializes the help menu
-          this.userManual = new JMenuItem("User Manual");
-          this.donateHere = new JMenuItem("Donate Here");
-          this.helpMenu.add(this.userManual);
-          this.helpMenu.add(this.donateHere);
-         
+
           //initializes the background menu items
           this.marioBackground = new JMenuItem("Mario Theme");
           this.standardBackground = new JMenuItem("Standard Theme");
           this.backgroundMenu.add(this.marioBackground);
           this.backgroundMenu.add(this.standardBackground);
-          
+
           //adds all menus to the menu bar
+          this.menuBar.add(this.statisticsMenu);
+          this.menuBar.add(this.notebookMenu);
+          this.menuBar.add(this.supportMenu);
           this.menuBar.add(this.colourMenu);
           this.menuBar.add(this.backgroundMenu);
-          this.menuBar.add(this.helpMenu);
-          this.menuBar.add(this.audioMenu);
-          this.menuBar.add(this.aIHelperMenu);
      }//draws the menu
-     
+
      //setCharacteristics method - sets the basic attributes of the JFrame
      private void setCharacteristics()
      {
@@ -260,15 +265,21 @@ public class MasterView extends JFrame
           this.setResizable(false);
           this.setLocationRelativeTo(null);
      }//end setCharacteristics
-     
+
      //registerControllers method - adds listeners to all input options
      private void registerControllers()
      {
-          //audio menu items
-          this.audioItem.addActionListener(new MenuItemController(this));
+          //Anushay menu items
+          this.summary.addActionListener(new MenuItemController(this));
+          this.history.addActionListener(new MenuItemController(this));
 
-          //aIHelper menu items
+          //laiba menu items
+          this.inputNotebook.addActionListener(new MenuItemController(this));
+          this.outputNotebook.addActionListener(new MenuItemController(this));
+
+          //Dunia menu items
           this.instructions.addActionListener(new MenuItemController(this));
+          this.audio.addActionListener(new MenuItemController(this));
           this.colourContrast.addActionListener(new MenuItemController(this));
 
           //colour menu items
@@ -277,21 +288,17 @@ public class MasterView extends JFrame
           this.colour3.addActionListener(new MenuItemController(this));
           this.colour4.addActionListener(new MenuItemController(this));
           this.colour5.addActionListener(new MenuItemController(this));
-          
-          //help menu items
-          this.donateHere.addActionListener(new MenuItemController(this));
-          this.userManual.addActionListener(new MenuItemController(this));
-                    
+
           //background menu items
           this.marioBackground.addActionListener(new MenuItemController(this));
           this.standardBackground.addActionListener(new MenuItemController(this));
-          
+
           //command buttons menu items
           this.start.addActionListener(new ButtonController(this));
           this.stop.addActionListener(new ButtonController(this));
           this.reset.addActionListener(new ButtonController(this));
      }//end registerControllers
-     
+
      /**** COMMANDS ****/
 
      //start method - program checks for start
@@ -306,9 +313,9 @@ public class MasterView extends JFrame
                }
                catch (InterruptedException ex)
                {
-                    
+
                }
-               
+
                //start simulation
                if(this.motionState)
                {
@@ -317,11 +324,6 @@ public class MasterView extends JFrame
                }//end if
           }//end while
      }//end start
-
-
-
-
-
 
      //main method
      public static void main(String[] args)

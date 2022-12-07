@@ -27,7 +27,7 @@ public class MusicAudio {
     //method to set the music files
     public void setMusicFiles(String standardMusic){
         try{
-            AudioInputStream standardMusicFile = AudioSystem.getAudioInputStream(new File(standardMusic));
+            AudioInputStream standardMusicFile = AudioSystem.getAudioInputStream(new File(standardMusic).getAbsoluteFile());
             AudioFormat format = standardMusicFile.getFormat();
             clip = AudioSystem.getClip();
             clip.open(standardMusicFile);

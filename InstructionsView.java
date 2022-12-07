@@ -32,51 +32,49 @@ public class InstructionsView extends JFrame{
         InstructionsView frame = new InstructionsView();
 
         //initialize and add the instructions panel
-        JScrollPane instructionsScrollPane = new JScrollPane(); //BoxLayout can not be shared (meaning not allowed to be an attribute) so the JPanel has to be made here
-        instructionsScrollPane.setLayout(new BoxLayout(instructionsScrollPane, BoxLayout.Y_AXIS));
-        frame.setContentPane(instructionsScrollPane);
+        JPanel instructionsPanel = new JPanel(); //BoxLayout can not be shared (meaning not allowed to be an attribute) so the JPanel has to be made here
+        instructionsPanel.setLayout(new BoxLayout(instructionsPanel, BoxLayout.Y_AXIS));
+        frame.setContentPane(instructionsPanel);
 
-        //initialize objects for the audio panel - holds text fields and sliders
-        JPanel music = new JPanel();
-        JPanel soundEffects = new JPanel();
+        //initialize objects for the instructions scroll pane - holds text field
+        JTextArea instructionsText = new JTextArea();
+        instructionsText.setLineWrap(true);
+        instructionsText.setWrapStyleWord(true);
+        instructionsText.setEditable(false);
+        String newLine = "\n";
+        instructionsText.append("Hello and thank you for using our physics simulator application! To understand the " +
+                "application better, we will provide you with instructions here." + newLine + newLine + "At the very top is our menu" +
+                "bar. You will have options to access statistics, save and load notebooks, read the instructions, change the colour of the " +
+                "ball, as well the background. " + newLine + newLine + "For the Statistics menu, you can see the " +
+                "history of the game which demonstrates the history of the plays in a table format, in time sensitive order. " +
+                "The same applies for the summary option however, we see 3 different tables showcasing the Average, Maximum and Minimum values for " +
+                "all kinematics parameters inputted." + newLine + newLine + "For the Notebook menu," +
+                " you are able to output a notebook by clicking save and choosing the file to save the simulator data in. To input a notebook, " +
+                "you can click choose file and pick file to load into simulator." + newLine + newLine +
+                "The User Support menu allows for users to read " +
+                "through the instructions" +
+                newLine + newLine + "There are several things you can input to move the ball. You can type in a value for time," +
+                " as well as for initial velocity, final velocity, acceleration, and displacement. To get the ball moving, click " +
+                "the Start button and to stop it, click the stop button. If you want to reset all of the values, click the " +
+                "Reset button.");
+
+        //initialize and add the JScrollPane, add scrolling capability,
+        // and putting instructionsText (text area) in instructionsScrollPane (scroll pane)
+        JScrollPane instructionsScrollPane = new JScrollPane(instructionsText);
+        instructionsScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        instructionsScrollPane.setPreferredSize(new Dimension(250, 250));
 
         //changes from last week - exit to dispose, so the entire program doesn't terminate, only the particular window.
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
         //some extra features
-        frame.setTitle("Audio Settings");
+        frame.setTitle("Instructions");
         frame.setLocation(0, 0);
-        frame.setSize(new Dimension(500, 200));
-
-        //labels - prompts for input (music/sound effects volume)
-        JLabel musicVolume = new JLabel("               Music Volume:");
-        JLabel soundEffectsVolume = new JLabel("Sound Effects Volume:");
-
-
-
-        //creating label where the noMusicImgIcon image will be stored
-        JLabel noMusicIcon = new JLabel();
-        //resizing the noMusicImgIcon image to another image that's the size of the JLabel
-        ImageIcon noMusicImgIcon = new ImageIcon(new ImageIcon("images\\no_music_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-        //creating an ImageIcon from the resized ImageIcon above
-        noMusicIcon.setIcon(noMusicImgIcon);
-
-        //creating label where the noSoundEffectsImgIcon image will be stored
-        JLabel noSoundEffectsIcon = new JLabel();
-        //resizing the noSoundEffectsImgIcon image to another image that's the size of the JLabel
-        ImageIcon noSoundEffectsImgIcon = new ImageIcon(new ImageIcon("images\\no_sound_effects_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
-        //creating an ImageIcon from the resized ImageIcon above
-        noSoundEffectsIcon.setIcon(noSoundEffectsImgIcon);
-
-        //add all inputs to their input objects
-        music.add(musicVolume);
-        music.add(noMusicIcon);
-        soundEffects.add(soundEffectsVolume);
-
+        frame.setSize(new Dimension(500, 400));
 
         //add all input objects to the first input panel
-        instructionsScrollPane.add(music);
+        instructionsPanel.add(instructionsScrollPane);
     }
 
 }
