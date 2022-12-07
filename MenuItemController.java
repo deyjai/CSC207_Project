@@ -11,13 +11,13 @@ public class MenuItemController implements ActionListener
 {
      //attributes
      private MasterView masterView; //holds a pointer to the MasterView class
-     
+
      //constructor - creates instance of MenuItemController
      public MenuItemController(MasterView m)
      {
           this.masterView = m;
      }//end constructor
-     
+
      //actionPerformed method - performs this action when a menu item is clicked
      public void actionPerformed(ActionEvent e)
      {
@@ -33,7 +33,7 @@ public class MenuItemController implements ActionListener
                     System.out.println(ex.getMessage());
                }//end try catch
           }
-          
+
           //if donate here option is clicked - opens a link to paypal
           else if(e.getActionCommand().equals("Donate Here"))
           {
@@ -47,35 +47,35 @@ public class MenuItemController implements ActionListener
                     System.exit(0);
                }//end try catch
           }
-          
+
           //if red colour is chosen - sets object to red
           else if(e.getActionCommand().equals("Red"))
           {
                masterView.getMotionView().setColor("red");
                masterView.getMotionView().repaint();
           }
-          
+
           //if blue colour is chosen - sets object to blue
           else if(e.getActionCommand().equals("Blue"))
           {
                masterView.getMotionView().setColor("blue");
                masterView.getMotionView().repaint();
           }
-          
+
           //if blue colour is chosen - sets object to blue
           else if(e.getActionCommand().equals("Green"))
           {
                masterView.getMotionView().setColor("green");
                masterView.getMotionView().repaint();
           }
-          
+
           //if white colour is chosen - sets object to white
           else if(e.getActionCommand().equals("White"))
           {
                masterView.getMotionView().setColor("white");
                masterView.getMotionView().repaint();
           }
-          
+
           //if black colour is chosen - sets object to black
           else if(e.getActionCommand().equals("Black"))
           {
@@ -88,7 +88,7 @@ public class MenuItemController implements ActionListener
           {
                this.masterView.getMotionView().setBackgroundMario();
           }
-          
+
           //if standard theme is chosen - sets background to standard
           else if(e.getActionCommand().equals("Standard Theme"))
           {
@@ -107,5 +107,5 @@ public class MenuItemController implements ActionListener
                InstructionsView.open();
           }
      }//end actionPerformed
-     
+
 }//end of class - MenuItemController

@@ -38,14 +38,6 @@ public class AudioView extends JFrame
 
     MasterView master;
 
-<<<<<<< HEAD
-    //constructor
-    public AudioView(MasterView m){
-        super();
-        this.master = m;
-    }
-    public static void open() {
-=======
     public AudioView(MasterView m)
     {
         super();
@@ -62,7 +54,6 @@ public class AudioView extends JFrame
 
     private void initAudioView()
     {
->>>>>>> d0de6e013bfa55a9ec7aac1559c1b82527c26809
         //initializes a new instance of the class MusicAudio
         MusicAudio musicAudio = new MusicAudio();
 
@@ -151,8 +142,6 @@ public class AudioView extends JFrame
                 musicAudio.floatControl.setValue(musicAudio.currentMusicVolume);
             }
         });
-
-
 
         playMusic();
     }
