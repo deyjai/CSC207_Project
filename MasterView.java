@@ -14,12 +14,14 @@ public class MasterView extends JFrame
      //menu bar
      private JMenuBar menuBar; //stores an instance of the menu bar
 
-     private JMenu colourMenu, helpMenu, backgroundMenu, templateMenu; //stores all menus in the menu bar
+     private JMenu colourMenu, backgroundMenu, statisticsMenu, notebookMenu, supportMenu; //stores all menus in the menu bar
 
      private JMenuItem colour1, colour2, colour3, colour4, colour5; //menu items for object colours
-     private JMenuItem userManual, donateHere; //menu items for the help menu
      private JMenuItem standardBackground, marioBackground; //menu items for backgrounds
-     private JMenuItem templateItem; //menu item(s) for the template
+     private JMenuItem summary, history; //menu item(s) for Anushay
+     private JMenuItem audio, aihelper; //menu items for Dunia
+     private JMenuItem outputNotebook, inputNotebook; //menu items for Laiba
+
 
      //main panels
      private JPanel mainPanel; //holds everything except the menu bar
@@ -200,14 +202,29 @@ public class MasterView extends JFrame
           this.menuBar = new JMenuBar();
           
           //initializes all menus in the menu bar
-          this.helpMenu = new JMenu("Help");
+          this.statisticsMenu = new JMenu("Statistics");
+          this.supportMenu = new JMenu("User Support");
+          this.notebookMenu = new JMenu("Notebook");
           this.colourMenu = new JMenu("Colours");
           this.backgroundMenu = new JMenu("Backgrounds");
-          this.templateMenu = new JMenu("Templates");
 
-          //initializes the menu item that opens up the template
-          this.templateItem = new JMenuItem("Open Template 1");
-          this.templateMenu.add(this.templateItem);
+          //initializes the menu items for Anushay
+          this.summary = new JMenuItem("Summary");
+          this.history = new JMenuItem("History");
+          this.statisticsMenu.add(this.summary);
+          this.statisticsMenu.add(this.history);
+
+          //initializes the menu items for Dunia
+          this.audio = new JMenuItem("Audio");
+          this.aihelper = new JMenuItem("AI Helper");
+          this.supportMenu.add(this.audio);
+          this.supportMenu.add(this.aihelper);
+
+          //initializes the menu items for Laiba
+          this.outputNotebook = new JMenuItem("Save");
+          this.inputNotebook = new JMenuItem("Load");
+          this.notebookMenu.add(this.outputNotebook);
+          this.notebookMenu.add(this.inputNotebook);
 
           //initializes the menu items for colour and adds them to the menu
           this.colour1 = new JMenuItem("Red");
@@ -220,12 +237,6 @@ public class MasterView extends JFrame
           this.colourMenu.add(colour3);
           this.colourMenu.add(colour4);
           this.colourMenu.add(colour5);
-          
-          //initializes the help menu
-          this.userManual = new JMenuItem("User Manual");
-          this.donateHere = new JMenuItem("Donate Here");
-          this.helpMenu.add(this.userManual);
-          this.helpMenu.add(this.donateHere);
          
           //initializes the background menu items
           this.marioBackground = new JMenuItem("Mario Theme");
@@ -234,10 +245,11 @@ public class MasterView extends JFrame
           this.backgroundMenu.add(this.standardBackground);
           
           //adds all menus to the menu bar
-          this.menuBar.add(this.templateMenu);
+          this.menuBar.add(this.statisticsMenu);
+          this.menuBar.add(this.notebookMenu);
+          this.menuBar.add(this.supportMenu);
           this.menuBar.add(this.colourMenu);
           this.menuBar.add(this.backgroundMenu);
-          this.menuBar.add(this.helpMenu);
      }//draws the menu
      
      //setCharacteristics method - sets the basic attributes of the JFrame
@@ -255,8 +267,17 @@ public class MasterView extends JFrame
      //registerControllers method - adds listeners to all input options
      private void registerControllers()
      {
-          //template menu items
-          this.templateItem.addActionListener(new MenuItemController(this));
+          //Anushay menu items
+          this.summary.addActionListener(new MenuItemController(this));
+          this.history.addActionListener(new MenuItemController(this));
+
+          //laiba menu items
+          this.inputNotebook.addActionListener(new MenuItemController(this));
+          this.outputNotebook.addActionListener(new MenuItemController(this));
+
+          //laiba menu items
+          this.aihelper.addActionListener(new MenuItemController(this));
+          this.audio.addActionListener(new MenuItemController(this));
 
           //colour menu items
           this.colour1.addActionListener(new MenuItemController(this));
@@ -264,10 +285,6 @@ public class MasterView extends JFrame
           this.colour3.addActionListener(new MenuItemController(this));
           this.colour4.addActionListener(new MenuItemController(this));
           this.colour5.addActionListener(new MenuItemController(this));
-          
-          //help menu items
-          this.donateHere.addActionListener(new MenuItemController(this));
-          this.userManual.addActionListener(new MenuItemController(this));
                     
           //background menu items
           this.marioBackground.addActionListener(new MenuItemController(this));
