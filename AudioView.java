@@ -35,6 +35,14 @@ public class AudioView extends JFrame
 
     //initializes a new instance of the class MusicAudio
     MusicAudio musicAudio = new MusicAudio();
+
+    MasterView master;
+
+    //constructor
+    public AudioView(MasterView m){
+        super();
+        this.master = m;
+    }
     public static void open() {
         //initializes a new instance of the class MusicAudio
         MusicAudio musicAudio = new MusicAudio();
