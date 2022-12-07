@@ -311,3 +311,4 @@ public class MasterView extends JFrame
           new MasterView().start();
      }//end main method
 }//end of class - MasterView
+

@@ -129,10 +129,6 @@ public class DataModel {
 
     }
 
-    public double getIntegral(double t1, double t2){
-
-        return 1.0;
-    }
 
     public ArrayList<double[]> getAllParameters(){
         return kinematicsParameters;
