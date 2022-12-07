@@ -317,7 +317,12 @@ public class MasterView extends JFrame
                }//end if
           }//end while
      }//end start
-     
+
+
+
+
+
+
      //main method
      public static void main(String[] args)
      {

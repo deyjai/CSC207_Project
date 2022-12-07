@@ -14,6 +14,8 @@ public class MotionView extends JComponent
      private String color; //colour for the object 
      private int startingHeight; //starting height for the object 
      private String compass; //compass string for direction
+
+     private String background; //holds a name for the current background (for Dunia)
      
      //constructor - initializes attributes
      public MotionView(ObjectMotion o)
@@ -22,6 +24,7 @@ public class MotionView extends JComponent
           this.model.setGUI(this); 
           this.setPreferredSize(new Dimension(700, 400));
           this.image = new ImageIcon("images/standard.jpg").getImage();
+          this.background = "standard";
           this.color = "black"; 
           this.startingHeight = 309;
      }//end constructor
@@ -92,7 +95,8 @@ public class MotionView extends JComponent
      public void setBackgroundMario() 
      { 
           this.startingHeight = 299; 
-          this.image = new ImageIcon("images/mario.png").getImage(); 
+          this.image = new ImageIcon("images/mario.png").getImage();
+          this.background = "mario";
           this.repaint(); 
      }//end setBackgroundMario 
      
@@ -100,8 +104,17 @@ public class MotionView extends JComponent
      public void setBackgroundStandard() 
      { 
           this.startingHeight = 309; 
-          this.image = new ImageIcon("images/standard.jpg").getImage(); 
+          this.image = new ImageIcon("images/standard.jpg").getImage();
+          this.background = "standard";
           this.repaint(); 
-     }//end setBackgroundStandard 
+     }//end setBackgroundStandard
+
+     //methods for Dunia
+     //this method will return a string "mario" or "standard" based on the current background of MotionView
+     public String getMotionBackground()
+     {
+          return this.background;
+     }
+
      
 }//end of class - MotionView

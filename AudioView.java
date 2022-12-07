@@ -35,30 +35,45 @@ public class AudioView extends JFrame
 
     //initializes a new instance of the class MusicAudio
     MusicAudio musicAudio = new MusicAudio();
-    public static void open() {
+
+    MasterView master;
+
+    public AudioView(MasterView m)
+    {
+        super();
+        this.master = m;
+
+        if(m.getMotionView().getMotionBackground() == "standard")
+        {
+            //play standard music
+        }
+        else if (m.getMotionView().getMotionBackground() == "mario") {
+            //play mario music
+        }
+    }
+
+    private void initAudioView()
+    {
         //initializes a new instance of the class MusicAudio
         MusicAudio musicAudio = new MusicAudio();
-
-        //basics
-        AudioView frame = new AudioView();
 
         //initialize and add the audio panel
         JPanel audioPanel = new JPanel(); //BoxLayout can not be shared (meaning not allowed to be an attribute) so the JPanel has to be made here
         audioPanel.setLayout(new BoxLayout(audioPanel, BoxLayout.Y_AXIS));
-        frame.setContentPane(audioPanel);
+        this.setContentPane(audioPanel);
 
         //initialize objects for the audio panel - holds text fields and sliders
         JPanel music = new JPanel();
         JPanel soundEffects = new JPanel();
 
         //changes from last week - exit to dispose, so the entire program doesn't terminate, only the particular window.
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
 
         //some extra features
-        frame.setTitle("Audio Settings");
-        frame.setLocation(0, 0);
-        frame.setSize(new Dimension(500, 200));
+        this.setTitle("Audio Settings");
+        this.setLocation(0, 0);
+        this.setSize(new Dimension(500, 200));
 
         //labels - prompts for input (music/sound effects volume)
         JLabel musicVolume = new JLabel("               Music Volume:");
@@ -73,16 +88,6 @@ public class AudioView extends JFrame
         changeMusicVolume.setSnapToTicks(true);
         Dimension d = changeMusicVolume.getPreferredSize();
         changeMusicVolume.setPreferredSize(new Dimension(d.width + 100, d.height));
-        changeMusicVolume.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                musicAudio.currentMusicVolume = changeMusicVolume.getValue();
-                if (musicAudio.currentMusicVolume == -40) {
-                    musicAudio.currentMusicVolume = -80;
-                }
-                musicAudio.floatControl.setValue(musicAudio.currentMusicVolume);
-            }
-        });
 
         //slider - input (sound effects volume)
         JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
@@ -119,6 +124,26 @@ public class AudioView extends JFrame
         //add all input objects to the first input panel
         audioPanel.add(music);
         audioPanel.add(soundEffects);
+    }
+
+
+    public static void open(MasterView m) {
+
+        AudioView a = new AudioView(m);
+        a.initAudioView();
+
+        changeMusicVolume.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                musicAudio.currentMusicVolume = changeMusicVolume.getValue();
+                if (musicAudio.currentMusicVolume == -40) {
+                    musicAudio.currentMusicVolume = -80;
+                }
+                musicAudio.floatControl.setValue(musicAudio.currentMusicVolume);
+            }
+        });
+
+
 
         playMusic();
     }
