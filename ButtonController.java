@@ -11,7 +11,7 @@ public class ButtonController implements ActionListener
      private MasterView masterView; //stores a pointer to the MasterView
      private ObjectMotion motionModel; //stores a pointer to the motionModel
 
-     private char missing1, missing2, missing3; //stores characters to identify the missing variable in the input field
+     private char missing1, missing2; //stores characters to identify the missing variable in the input field
      
      //constructor - initializes all attributes to their default values
      public ButtonController(MasterView master)
@@ -20,7 +20,6 @@ public class ButtonController implements ActionListener
           this.motionModel = this.masterView.getMotionModel();
           this.missing1 = ' ';
           this.missing2 = ' ';
-          this.missing3 = ' ';
      }//end constructor
      
      //actionPerformed method - this is called when a button is pressed
@@ -115,10 +114,6 @@ public class ButtonController implements ActionListener
                          {
                               this.missing2 = 'a';
                          }
-                         else
-                         {
-                              this.missing3 = 'a';
-                         }//end if
                     }//try catch
                     
                     
@@ -210,7 +205,9 @@ public class ButtonController implements ActionListener
                     this.masterView.getInputField("v1").setText("" + (int)motionModel.getV1() + "." + ((int)(motionModel.getV1()*100) % 100));
                     this.masterView.getInputField("v2").setText("" + (int)motionModel.getV2() + "." + ((int)(motionModel.getV2()*100) % 100));
                     this.masterView.getInputField("time").setText("" + (int)motionModel.getTime() + "." + ((int)(motionModel.getTime()*100) % 100));
-                    
+
+                    DataModel.setParameters(motionModel.getDisplacement(), motionModel.getAcceleration(), motionModel.getV1(), motionModel.getV2(), motionModel.getTime());
+
                     //sets the motion state in the master view to true. Now the program can start animation
                     this.masterView.setMotionState(true);
                }
@@ -269,7 +266,6 @@ public class ButtonController implements ActionListener
           //program resets missing values for next use
           this.missing1 = ' ';
           this.missing2 = ' ';
-          this.missing3 = ' ';
      }//end actionPerformed method
      
 }//end of class - ButtonController
