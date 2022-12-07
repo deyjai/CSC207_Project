@@ -8,23 +8,6 @@
 import javax.swing.*;
 import java.awt.*;
 
-/*
-This will be your GUI. If you're making a model class, DO NOT mix it with this class. You'll need to create a separate
-model class, and this class will hold a pointer, so you can access it.
-
-For now, you should make your appropriate set/get methods and assume these methods will give you the info you need.
-Again, PLEASE don't make multiple attributes for your kinematics parameters if you're using them.
-    - If you're doing the DataModel class, there should be one private ArrayList <double[]> attribute that holds the
-    history of all kinematics parameters. You only need one set method (with a parameter for each kinematics value) and
-    one get method for this.
-    - If any other class needs kinematics parameters, it should have an attribute that points to the DataModel class.
-    You can get everything you need using one of the DataModel's get methods.
-    - If you need to directly access one of the components in MasterView (this will likely only be for the Audio/AIHelper
-    class), you should make an attribute that points to MasterView.
-
-* As for controllers, you can pretend they don't exist for now. Just make an input component (ex. JButton) and a method
-that you want to be executed when that button is called.
- */
 
 public class InstructionsView extends JFrame{
     public static void open() {
