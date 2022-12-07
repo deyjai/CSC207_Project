@@ -1,13 +1,12 @@
 import java.io.File;
 
-public class saveTxtStrategy implements saveStrategy{
+public class saveOtherStrategy implements saveStrategy{
     public File file;
-    public saveTxtStrategy(File file) {
+    public saveOtherStrategy(File file) {
         this.file = file;
     }
-
     @Override
     public String saveBoard(File file) {
-        return "(TXT File)";
+        return "(Other File Type)";
     }
 }

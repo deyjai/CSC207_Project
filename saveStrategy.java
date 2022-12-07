@@ -1,3 +1,5 @@
+import java.io.File;
+
 public interface saveStrategy {
-    void saveBoard();
+    String saveBoard(File file);
 }

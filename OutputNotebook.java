@@ -26,7 +26,7 @@ Again, PLEASE don't make multiple attributes for your kinematics parameters if y
 * As for controllers, you can pretend they don't exist for now. Just make an input component (ex. JButton) and a method
 that you want to be executed when that button is called.
 */
-public class OutputNotebook extends JFrame
+public class OutputNotebook extends JFrame implements saveStrategy
 
 {
     private String file;
@@ -71,7 +71,7 @@ public class OutputNotebook extends JFrame
         button.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             int option = fileChooser.showSaveDialog(this);
-            if(option == JFileChooser.APPROVE_OPTION){
+            if(option == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 try {
                     FileWriter fw = new FileWriter(file.getPath());
@@ -87,7 +87,16 @@ public class OutputNotebook extends JFrame
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                label.setText("File Saved as: " + file.getName());
+
+                if (file.getPath().contains("txt")) {
+                    saveTxtStrategy m = new saveTxtStrategy(file);
+                    this.strat = m;
+                } else {
+                    saveOtherStrategy m = new saveOtherStrategy(file);
+                    this.strat = m;
+                }
+                String text = saveBoard(file);
+                label.setText(text + " File Saved as: " + file.getName());
             }else{
                 label.setText("Save command canceled");
             }
@@ -99,8 +108,8 @@ public class OutputNotebook extends JFrame
     }
 
 
-    public void saveBoard() {
-        // this.strat.saveBoard();
+    public String saveBoard(File file) {
+        return this.strat.saveBoard(file);
         //make abstract -> two options to save file as
     }
 }
