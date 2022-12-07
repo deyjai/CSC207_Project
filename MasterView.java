@@ -11,6 +11,9 @@ public class MasterView extends JFrame
 {
      /**** ATTRIBUTES ****/
 
+     //data
+     public static final DataModel DATA_MODEL = new DataModel();
+
      //menu bar
      private JMenuBar menuBar; //stores an instance of the menu bar
 
@@ -37,7 +40,7 @@ public class MasterView extends JFrame
      //used for user input
      private JPanel time, initialV, finalV, acceleration, displacement; //panels to hold each prompt and input - stored in an input panel
      private JLabel promptTime, promptInitialV, promptFinalV, promptAcceleration, promptDisplacement; //labels for prompts
-     private JTextField inputTime, inputInitialV, inputFinalV, inputAcceleration, inputDisplacement; //text fields for input
+     public JTextField inputTime, inputInitialV, inputFinalV, inputAcceleration, inputDisplacement; //text fields for input
      
      //command buttons for the simulation
      private JButton start;
@@ -216,7 +219,7 @@ public class MasterView extends JFrame
 
           //initializes the menu items for Dunia
           this.audio = new JMenuItem("Audio");
-          this.aihelper = new JMenuItem("AI Helper");
+          this.aihelper = new JMenuItem("Helper");
           this.supportMenu.add(this.audio);
           this.supportMenu.add(this.aihelper);
 

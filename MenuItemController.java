@@ -71,30 +71,30 @@ public class MenuItemController implements ActionListener
           //if the template is chosen - opens a Template JFrame with a static method
           else if(e.getActionCommand().equals("Summary"))
           {
-               //Template.open();
+               SummaryView.open();
           }
           //if the template is chosen - opens a Template JFrame with a static method
           else if(e.getActionCommand().equals("History"))
           {
-               //Template.open();
+               HistoryView.open();
           }
           //if the template is chosen - opens a Template JFrame with a static method
           else if(e.getActionCommand().equals("Audio"))
           {
-               //Template.open();
+               AudioView.open();
           }
           //if the template is chosen - opens a Template JFrame with a static method
-          else if(e.getActionCommand().equals("AI Helper"))
+          else if(e.getActionCommand().equals("Helper"))
           {
-               //Template.open();
+               InstructionsView.open();
           }
           else if(e.getActionCommand().equals("Save"))
           {
-               //Template.open();
+               OutputNotebook.open();
           }
           else if(e.getActionCommand().equals("Load"))
           {
-               //Template.open();
+               InputNotebook.open();
           }
      }//end actionPerformed
      
