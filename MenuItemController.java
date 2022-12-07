@@ -100,6 +100,12 @@ public class MenuItemController implements ActionListener
           {
                AudioView.open();
           }
+
+          //if the Audio menu is chosen - opens an Audio JFrame with a static method
+          else if(e.getActionCommand().equals("Instructions"))
+          {
+               InstructionsView.open();
+          }
      }//end actionPerformed
      
 }//end of class - MenuItemController

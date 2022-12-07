@@ -8,6 +8,8 @@
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.ImageIcon;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /*
 This will be your GUI. If you're making a model class, DO NOT mix it with this class. You'll need to create a separate
@@ -28,8 +30,15 @@ that you want to be executed when that button is called.
 */
 public class AudioView extends JFrame
 {
-    public static void open()
-    {
+    String standardMusic = "Audio\\StandardMelody.mp3";
+    //String marioMusic = "Audio\\Super_Mario_Bros_Medley.mp3";
+
+    //initializes a new instance of the class MusicAudio
+    MusicAudio musicAudio = new MusicAudio();
+    public static void open() {
+        //initializes a new instance of the class MusicAudio
+        MusicAudio musicAudio = new MusicAudio();
+
         //basics
         AudioView frame = new AudioView();
 
@@ -48,7 +57,7 @@ public class AudioView extends JFrame
 
         //some extra features
         frame.setTitle("Audio Settings");
-        frame.setLocation(0,0);
+        frame.setLocation(0, 0);
         frame.setSize(new Dimension(500, 200));
 
         //labels - prompts for input (music/sound effects volume)
@@ -56,14 +65,24 @@ public class AudioView extends JFrame
         JLabel soundEffectsVolume = new JLabel("Sound Effects Volume:");
 
         //slider - input (music volume)
-        JSlider changeMusicVolume = new JSlider(0, 100, 0);
+        JSlider changeMusicVolume = new JSlider(-40, 6, 0);
         changeMusicVolume.setMinorTickSpacing(5);
         changeMusicVolume.setMajorTickSpacing(10);
         changeMusicVolume.setPaintTicks(true);
         changeMusicVolume.setPaintLabels(true);
         changeMusicVolume.setSnapToTicks(true);
         Dimension d = changeMusicVolume.getPreferredSize();
-        changeMusicVolume.setPreferredSize(new Dimension(d.width+100,d.height));
+        changeMusicVolume.setPreferredSize(new Dimension(d.width + 100, d.height));
+        changeMusicVolume.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                musicAudio.currentMusicVolume = changeMusicVolume.getValue();
+                if (musicAudio.currentMusicVolume == -40) {
+                    musicAudio.currentMusicVolume = -80;
+                }
+                musicAudio.floatControl.setValue(musicAudio.currentMusicVolume);
+            }
+        });
 
         //slider - input (sound effects volume)
         JSlider changeSoundEffectsVolume = new JSlider(0, 100, 0);
@@ -73,19 +92,19 @@ public class AudioView extends JFrame
         changeSoundEffectsVolume.setPaintLabels(true);
         changeSoundEffectsVolume.setSnapToTicks(true);
         Dimension d2 = changeSoundEffectsVolume.getPreferredSize();
-        changeSoundEffectsVolume.setPreferredSize(new Dimension(d2.width+100,d2.height));
+        changeSoundEffectsVolume.setPreferredSize(new Dimension(d2.width + 100, d2.height));
 
         //creating label where the noMusicImgIcon image will be stored
         JLabel noMusicIcon = new JLabel();
         //resizing the noMusicImgIcon image to another image that's the size of the JLabel
-        ImageIcon noMusicImgIcon = new ImageIcon(new ImageIcon("C:\\Users\\dunia\\OneDrive\\Documents\\University\\Course Work\\University Year 4\\Fall Semester\\CSC207\\CSC207_Project\\images\\no_music_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        ImageIcon noMusicImgIcon = new ImageIcon(new ImageIcon("images\\no_music_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         //creating an ImageIcon from the resized ImageIcon above
         noMusicIcon.setIcon(noMusicImgIcon);
 
         //creating label where the noSoundEffectsImgIcon image will be stored
         JLabel noSoundEffectsIcon = new JLabel();
         //resizing the noSoundEffectsImgIcon image to another image that's the size of the JLabel
-        ImageIcon noSoundEffectsImgIcon = new ImageIcon(new ImageIcon("C:\\Users\\dunia\\OneDrive\\Documents\\University\\Course Work\\University Year 4\\Fall Semester\\CSC207\\CSC207_Project\\images\\no_sound_effects_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+        ImageIcon noSoundEffectsImgIcon = new ImageIcon(new ImageIcon("images\\no_sound_effects_icon.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
         //creating an ImageIcon from the resized ImageIcon above
         noSoundEffectsIcon.setIcon(noSoundEffectsImgIcon);
 
@@ -101,5 +120,12 @@ public class AudioView extends JFrame
         audioPanel.add(music);
         audioPanel.add(soundEffects);
 
+        playMusic();
+    }
+    //method that plays music
+    public void playMusic() {
+        musicAudio.setMusicFiles(standardMusic);
+        musicAudio.playMusic();
+        musicAudio.loopMusic();
     }
 }

@@ -14,12 +14,13 @@ public class MasterView extends JFrame
      //menu bar
      private JMenuBar menuBar; //stores an instance of the menu bar
 
-     private JMenu colourMenu, helpMenu, backgroundMenu, audioMenu; //stores all menus in the menu bar
+     private JMenu colourMenu, helpMenu, backgroundMenu, audioMenu, aIHelperMenu; //stores all menus in the menu bar
 
      private JMenuItem colour1, colour2, colour3, colour4, colour5; //menu items for object colours
      private JMenuItem userManual, donateHere; //menu items for the help menu
      private JMenuItem standardBackground, marioBackground; //menu items for backgrounds
      private JMenuItem audioItem; //menu item(s) for the audio menu
+     private JMenuItem instructions, colourContrast; //menu items for aIHelper
 
      //main panels
      private JPanel mainPanel; //holds everything except the menu bar
@@ -204,10 +205,17 @@ public class MasterView extends JFrame
           this.colourMenu = new JMenu("Colours");
           this.backgroundMenu = new JMenu("Backgrounds");
           this.audioMenu = new JMenu("Audio");
+          this.aIHelperMenu = new JMenu("AI Helper");
 
           //initializes the menu item that opens up the audio menu
           this.audioItem = new JMenuItem("Open Audio Menu");
           this.audioMenu.add(this.audioItem);
+
+          //initializes the menu items that opens up the aIHelper menu
+          this.instructions = new JMenuItem("Instructions");
+          this.colourContrast = new JMenuItem("Colour Contrast");
+          this.aIHelperMenu.add(this.instructions);
+          this.aIHelperMenu.add(this.colourContrast);
 
           //initializes the menu items for colour and adds them to the menu
           this.colour1 = new JMenuItem("Red");
@@ -238,6 +246,7 @@ public class MasterView extends JFrame
           this.menuBar.add(this.backgroundMenu);
           this.menuBar.add(this.helpMenu);
           this.menuBar.add(this.audioMenu);
+          this.menuBar.add(this.aIHelperMenu);
      }//draws the menu
      
      //setCharacteristics method - sets the basic attributes of the JFrame
@@ -257,6 +266,10 @@ public class MasterView extends JFrame
      {
           //audio menu items
           this.audioItem.addActionListener(new MenuItemController(this));
+
+          //aIHelper menu items
+          this.instructions.addActionListener(new MenuItemController(this));
+          this.colourContrast.addActionListener(new MenuItemController(this));
 
           //colour menu items
           this.colour1.addActionListener(new MenuItemController(this));
