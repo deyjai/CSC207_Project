@@ -84,6 +84,7 @@ public class AudioView extends JFrame
 
         //slider - input (music volume)
         changeMusicVolume = new JSlider(-40, 6, 0);
+
         changeMusicVolume.setMinorTickSpacing(5);
         changeMusicVolume.setMajorTickSpacing(10);
         changeMusicVolume.setPaintTicks(true);
@@ -143,17 +144,16 @@ public class AudioView extends JFrame
         });
     }
 
-
     public static void open(MasterView m) {
 
         AudioView a = new AudioView(m);
         a.initAudioView();
         a.addListener();
-        a.playMusic();
+        a.playMusic(a.standardMusic);
     }
 
     //method that plays music
-    public void playMusic() {
+    public void playMusic(String standardMusic) {
         musicAudio.setMusicFiles(standardMusic);
         musicAudio.playMusic();
         musicAudio.loopMusic();
