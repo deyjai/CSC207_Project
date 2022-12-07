@@ -22,34 +22,7 @@ public class MenuItemController implements ActionListener
      public void actionPerformed(ActionEvent e)
      {
           //if user manual is clicked - link to manual is opened
-          if(e.getActionCommand().equals("User Manual"))
-          {
-               try
-               {
-                    WebPage.openWebpage(new URL("https://docs.google.com/document/d/1DIo9VoXnoqKHM-vjk-FfupjOo3wthZAgv2zNEfhprds/edit?usp=sharing"));
-               }
-               catch(MalformedURLException ex)
-               {
-                    System.out.println(ex.getMessage());
-               }//end try catch
-          }
-          
-          //if donate here option is clicked - opens a link to paypal
-          else if(e.getActionCommand().equals("Donate Here"))
-          {
-               try
-               {
-                    WebPage.openWebpage(new URL("https://www.paypal.com/ca/home"));
-               }
-               catch(MalformedURLException ex)
-               {
-                    System.out.println(ex.getMessage());
-                    System.exit(0);
-               }//end try catch
-          }
-          
-          //if red colour is chosen - sets object to red
-          else if(e.getActionCommand().equals("Red"))
+          if(e.getActionCommand().equals("Red"))
           {
                masterView.getMotionView().setColor("red");
                masterView.getMotionView().repaint();
@@ -96,9 +69,32 @@ public class MenuItemController implements ActionListener
           }
 
           //if the template is chosen - opens a Template JFrame with a static method
-          else if(e.getActionCommand().equals("Open Template 1"))
+          else if(e.getActionCommand().equals("Summary"))
           {
-               Template.open();
+               //Template.open();
+          }
+          //if the template is chosen - opens a Template JFrame with a static method
+          else if(e.getActionCommand().equals("History"))
+          {
+               //Template.open();
+          }
+          //if the template is chosen - opens a Template JFrame with a static method
+          else if(e.getActionCommand().equals("Audio"))
+          {
+               //Template.open();
+          }
+          //if the template is chosen - opens a Template JFrame with a static method
+          else if(e.getActionCommand().equals("AI Helper"))
+          {
+               //Template.open();
+          }
+          else if(e.getActionCommand().equals("Save"))
+          {
+               //Template.open();
+          }
+          else if(e.getActionCommand().equals("Load"))
+          {
+               //Template.open();
           }
      }//end actionPerformed
      
